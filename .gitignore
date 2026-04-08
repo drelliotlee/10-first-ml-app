@@ -23,9 +23,7 @@ logs/*.log
 .env
 
 # IDE
-.vscode/*.json
-!.vscode/settings.json
-!.vscode/extensions.json
+.vscode/
 .claude/
 
 # Jupyter
