@@ -1,20 +1,36 @@
 # Python
 __pycache__/
-*.pyc
+*.py[oc]
 *.egg-info/
 .venv/
+build/
+dist/
+wheels/
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # ML artifacts
 models/*.pkl
+models/*.pt
+models/*.h5
+models/*.onnx
 logs/*.log
 
 # Environment
 .env
 
 # IDE
-.vscode/settings.json
+.vscode/*.json
+!.vscode/settings.json
+!.vscode/extensions.json
 .claude/
+
+# Jupyter
+.ipynb_checkpoints/
 
 # OS
 .DS_Store
- 
+Thumbs.db
