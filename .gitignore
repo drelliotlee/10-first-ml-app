@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+
+# ML artifacts
+models/*.pkl
+logs/*.log
+
+# Environment
+.env
+
+# IDE
+.vscode/settings.json
+.claude/
+
+# OS
+.DS_Store
