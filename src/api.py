@@ -1,10 +1,14 @@
 import logging
+import os
 import psycopg2
 from contextlib import asynccontextmanager
 from datetime import datetime
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from pydantic import BaseModel
-import joblib
+from src.utils import load_model
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -17,16 +21,16 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
-model = joblib.load("models/model.pkl")
+model = load_model()
 
 
 def get_db_connection():
     return psycopg2.connect(
         host="localhost",
         port=5432,
-        user="postgres",
-        password="postgres",
-        database="iris_db",
+        user=os.environ["POSTGRES_USER"],
+        password=os.environ["POSTGRES_PASSWORD"],
+        database=os.environ["POSTGRES_DB"],
     )
 
 

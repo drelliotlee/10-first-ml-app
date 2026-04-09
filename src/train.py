@@ -2,8 +2,7 @@ import logging
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-import joblib
-from pathlib import Path
+from src.utils import save_model
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -24,8 +23,7 @@ def train():
     accuracy = model.score(X_test, y_test)
     logger.info(f"Accuracy: {accuracy:.4f}")
 
-    Path("models").mkdir(exist_ok=True)
-    joblib.dump(model, "models/model.pkl")
+    save_model(model)
     logger.info("Model saved to models/model.pkl")
 
 
