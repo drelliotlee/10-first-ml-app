@@ -19,6 +19,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
       - ./models:/app/models
     depends_on:
       - db
