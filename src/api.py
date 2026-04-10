@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from pydantic import BaseModel
 from src.utils import load_model
+from src.preprocess import preprocess_input
 
 load_dotenv()
 
@@ -49,12 +50,11 @@ def init_db():
     conn.close()
 
 
-
 class PredictionRequest(BaseModel):
-    sepal_length: float
-    sepal_width: float
-    petal_length: float
-    petal_width: float
+    temperature_2m_max: float
+    temperature_2m_min: float
+    windspeed_10m_max: float
+    relative_humidity_2m_max: float
 
 
 class PredictionResponse(BaseModel):
@@ -69,12 +69,7 @@ def health():
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict(req: PredictionRequest):
-    features = [
-        req.sepal_length,
-        req.sepal_width,
-        req.petal_length,
-        req.petal_width,
-    ]
+    features = preprocess_input(req.model_dump())
 
     prediction = int(model.predict([features])[0])
     probability = model.predict_proba([features])[0].tolist()
