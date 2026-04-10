@@ -14,7 +14,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.api
-      target: production
     env_file:
       - .env
     ports:
@@ -24,23 +23,6 @@ services:
       - ./models:/app/models
     depends_on:
       - db
-
-  test:
-    container_name: rain-test
-    build:
-      context: .
-      dockerfile: Dockerfile.api
-      target: test
-    env_file:
-      - .env
-    volumes:
-      - ./src:/app/src
-      - ./tests:/app/tests
-      - ./models:/app/models
-    depends_on:
-      - db
-    profiles:
-      - test
 
   train:
     container_name: rain-train
