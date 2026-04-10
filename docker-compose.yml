@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: iris-db
+    container_name: rain-db
     image: postgres:15-alpine
     env_file:
       - .env
@@ -10,7 +10,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   api:
-    container_name: iris-api
+    container_name: rain-api
     build:
       context: .
       dockerfile: Dockerfile.api
@@ -26,7 +26,7 @@ services:
       - db
 
   train:
-    container_name: iris-train
+    container_name: rain-train
     build:
       context: .
       dockerfile: Dockerfile.train
