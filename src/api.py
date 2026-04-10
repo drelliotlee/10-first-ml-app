@@ -26,7 +26,7 @@ model = load_model()
 
 def get_db_connection():
     return psycopg2.connect(
-        host="localhost",
+        host=os.environ["DB_HOST"],
         port=5432,
         user=os.environ["POSTGRES_USER"],
         password=os.environ["POSTGRES_PASSWORD"],
